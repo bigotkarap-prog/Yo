@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_content = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -334,6 +334,9 @@
             display: none;
             position: relative;
             padding: 20px;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         .container.visible {
@@ -494,7 +497,8 @@
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px 20px 20px 5px;
             padding: 25px 30px;
-            max-width: 520px;
+            max-width: 90vw;
+            width: 520px;
             margin: 15px auto;
             position: relative;
             box-shadow:
@@ -503,6 +507,8 @@
             border: 2px solid rgba(255, 107, 107, 0.2);
             transform: rotate(-1deg);
             transition: transform 0.3s;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .message-card:hover {
@@ -523,7 +529,10 @@
             font-size: 1.25rem;
             color: #4a4a4a;
             line-height: 1.9;
-            white-space: pre-line;
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
 
         /* ============================================
@@ -1106,9 +1115,15 @@
             .name        { font-size: 3rem; }
             .bouquet     { font-size: 3.5rem; }
             .main-cake   { font-size: 3.5rem; }
-            .message-card { margin: 15px 10px; padding: 20px; }
+            .message-card {
+                width: 92vw;
+                max-width: 92vw;
+                padding: 20px 18px;
+                margin: 15px auto;
+            }
+            .message-text { font-size: 1.05rem; }
             .bunny-art   { font-size: 0.9rem; padding: 10px 15px; }
-            .message-text { font-size: 1.1rem; }
+            .btn         { padding: 10px 28px; font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -1564,3 +1579,10 @@
     </script>
 </body>
 </html>
+'''
+
+with open('/mnt/agents/output/happy_birthday_leecha.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("File saved successfully!")
+print(f"File size: {len(html_content)} characters")
