@@ -1,568 +1,1566 @@
-1000	
-  1001	        .env-flap {
-  1002	            position: absolute;
-  1003	            top: 0;
-  1004	            left: 0;
-  1005	            right: 0;
-  1006	            height: 130px;
-  1007	            background: linear-gradient(175deg, #f5d5ce 0%, #eec5bc 50%, #e8b8ae 100%);
-  1008	            border-radius: 14px 14px 0 0;
-  1009	            clip-path: polygon(0 0, 100% 0, 50% 78%);
-  1010	            border: 1.2px solid rgba(210, 155, 145, 0.5);
-  1011	            transform-origin: top center;
-  1012	            transform: rotateX(0deg);
-  1013	            transition: transform 1.0s cubic-bezier(0.25, 0.85, 0.25, 1);
-  1014	            will-change: transform;
-  1015	            backface-visibility: hidden;
-  1016	            box-shadow: inset 0 -8px 20px rgba(180, 110, 100, 0.12);
-  1017	        }
-  1018	
-  1019	        .env-flap::before {
-  1020	            content: '';
-  1021	            position: absolute;
-  1022	            top: 0;
-  1023	            left: 0;
-  1024	            right: 0;
-  1025	            height: 28px;
-  1026	            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 0%, transparent 100%);
-  1027	            border-radius: 14px 14px 0 0;
-  1028	            pointer-events: none;
-  1029	        }
-  1030	
-  1031	        .env-flap::after {
-  1032	            content: '';
-  1033	            position: absolute;
-  1034	            inset: 0;
-  1035	            background: linear-gradient(175deg, rgba(0, 0, 0, 0.0) 0%, rgba(140, 80, 70, 0.10) 100%);
-  1036	            transition: opacity 1.0s ease;
-  1037	            pointer-events: none;
-  1038	        }
-  1039	
-  1040	        .envelope-wrapper.open .env-flap {
-  1041	            transform: rotateX(-178deg);
-  1042	        }
-  1043	
-  1044	        .envelope-wrapper.open .env-flap::after {
-  1045	            opacity: 0;
-  1046	        }
-  1047	
-  1048	        .env-seal {
-  1049	            position: absolute;
-  1050	            top: calc(130px * 0.78 - 20px);
-  1051	            left: 50%;
-  1052	            transform: translateX(-50%);
-  1053	            font-size: 2rem;
-  1054	            z-index: 7;
-  1055	            pointer-events: none;
-  1056	            transition:
-  1057	                opacity 0.3s 0.05s ease,
-  1058	                transform 0.3s 0.05s cubic-bezier(0.34, 1.2, 0.64, 1);
-  1059	            will-change: opacity, transform;
-  1060	            filter: drop-shadow(0 2px 6px rgba(190, 130, 120, 0.3));
-  1061	        }
-  1062	
-  1063	        .envelope-wrapper.open .env-seal {
-  1064	            opacity: 0;
-  1065	            transform: translateX(-50%) scale(0.5) translateY(-6px);
-  1066	        }
-  1067	
-  1068	        .envelope-label {
-  1069	            font-family: 'Cormorant Garamond', Georgia, serif;
-  1070	            font-style: italic;
-  1071	            font-weight: 500;
-  1072	            font-size: 1.25rem;
-  1073	            color: rgba(160, 110, 100, 0.75);
-  1074	            letter-spacing: 0.05em;
-  1075	            text-align: center;
-  1076	            animation: labelBreath 3s ease-in-out infinite;
-  1077	        }
-  1078	
-  1079	        .envelope-label .sparkle-gold {
-  1080	            color: #d4a843;
-  1081	            font-style: normal;
-  1082	            font-size: 0.9rem;
-  1083	        }
-  1084	
-  1085	        @keyframes labelBreath {
-  1086	            0%, 100% { opacity: 0.7; }
-  1087	            50%      { opacity: 1.0; }
-  1088	        }
-  1089	
-  1090	        .envelope-click-hint {
-  1091	            display: none;
-  1092	        }
-  1093	
-  1094	        @keyframes flowerRain {
-  1095	            0%   { transform: translateY(-60px) rotate(-10deg) scale(0.6); opacity: 0; }
-  1096	            5%   { opacity: 1; }
-  1097	            90%  { opacity: 0.9; }
-  1098	            100% { transform: translateY(110vh) rotate(20deg) scale(0.9); opacity: 0; }
-  1099	        }
-  1100	
-  1101	        /* ============================================
-  1102	           RESPONSIVE
-  1103	           ============================================ */
-  1104	        @media (max-width: 600px) {
-  1105	            h1           { font-size: 2rem; }
-  1106	            .name        { font-size: 3rem; }
-  1107	            .bouquet     { font-size: 3.5rem; }
-  1108	            .main-cake   { font-size: 3.5rem; }
-  1109	            .message-card { margin: 15px 10px; padding: 20px; }
-  1110	            .bunny-art   { font-size: 0.9rem; padding: 10px 15px; }
-  1111	            .message-text { font-size: 1.1rem; }
-  1112	        }
-  1113	    </style>
-  1114	</head>
-  1115	<body>
-  1116	    <!-- ============================================
-  1117	         BACKGROUND
-  1118	         ============================================ -->
-  1119	    <div class="ocean-bg"></div>
-  1120	
-  1121	    <!-- Waves -->
-  1122	    <div class="wave wave-1"></div>
-  1123	    <div class="wave wave-2"></div>
-  1124	    <div class="wave wave-3"></div>
-  1125	
-  1126	    <!-- Clouds -->
-  1127	    <div class="cloud cloud-1"></div>
-  1128	    <div class="cloud cloud-2"></div>
-  1129	    <div class="cloud cloud-3"></div>
-  1130	
-  1131	    <!-- ============================================
-  1132	         ENVELOPE OVERLAY
-  1133	         ============================================ -->
-  1134	    <div class="envelope-overlay" id="envelopeOverlay">
-  1135	        <div class="envelope-bob" id="envelopeBob">
-  1136	            <div class="envelope-wrapper" id="envelopeWrapper">
-  1137	                <div class="env-body"></div>
-  1138	                <div class="env-letter">
-  1139	                    <div class="env-letter-inner">
-  1140	                        <div class="env-letter-emoji">🎂🌷</div>
-  1141	                        <div class="env-letter-text">For Leecha ✨</div>
-  1142	                    </div>
-  1143	                </div>
-  1144	                <div class="env-flap-container">
-  1145	                    <div class="env-flap" id="envFlap"></div>
-  1146	                </div>
-  1147	                <div class="env-seal" id="envSeal">💌</div>
-  1148	            </div>
-  1149	        </div>
-  1150	        <div class="envelope-label">A surprise awaits...</div>
-  1151	        <div class="envelope-click-hint">Click to open 💌</div>
-  1152	    </div>
-  1153	
-  1154	    <!-- ============================================
-  1155	         OPENING OVERLAY
-  1156	         ============================================ -->
-  1157	    <div class="opening-overlay" id="openingOverlay">
-  1158	        <div class="opening-bubble" id="openingBubble">
-  1159	            <div class="ponyo-cake">🎂</div>
-  1160	        </div>
-  1161	        <div class="candles-row">
-  1162	            <div class="ponyo-candle">
-  1163	                <div class="ponyo-flame" id="oFlame1"></div>
-  1164	                <div class="candle-body"></div>
-  1165	            </div>
-  1166	            <div class="ponyo-candle">
-  1167	                <div class="ponyo-flame" id="oFlame2"></div>
-  1168	                <div class="candle-body"></div>
-  1169	            </div>
-  1170	            <div class="ponyo-candle">
-  1171	                <div class="ponyo-flame" id="oFlame3"></div>
-  1172	                <div class="candle-body"></div>
-  1173	            </div>
-  1174	        </div>
-  1175	        <div class="opening-text">Make a wish, Leecha...</div>
-  1176	        <div class="hint-text">Blow the candles or click the bubble ✨</div>
-  1177	    </div>
-  1178	
-  1179	    <!-- ============================================
-  1180	         MAIN CONTENT
-  1181	         ============================================ -->
-  1182	    <div class="container" id="mainContent">
-  1183	        <h1>Happy Birthday</h1>
-  1184	        <div class="name">Leecha 🥳🎉</div>
-  1185	
-  1186	        <!-- Bunny ASCII Art -->
-  1187	        <div class="bunny-art">(\_(/)
-  1188	(• .•)
-  1189	(&gt;🌷</div>
-  1190	
-  1191	        <!-- Bouquet -->
-  1192	        <div class="bouquet-container" id="bouquet" onclick="shakeBouquet()">
-  1193	            <div class="bouquet">💐</div>
-  1194	            <div class="bouquet-ribbon"></div>
-  1195	        </div>
-  1196	
-  1197	        <!-- Cake -->
-  1198	        <div class="cake-wrapper" id="cakeWrapper" onclick="blowMainCandles()">
-  1199	            <div class="main-cake" id="mainCake">🎂</div>
-  1200	            <div class="main-candles">
-  1201	                <div class="ponyo-candle">
-  1202	                    <div class="ponyo-flame" id="mFlame1"></div>
-  1203	                    <div class="candle-body"></div>
-  1204	                </div>
-  1205	                <div class="ponyo-candle">
-  1206	                    <div class="ponyo-flame" id="mFlame2"></div>
-  1207	                    <div class="candle-body"></div>
-  1208	                </div>
-  1209	                <div class="ponyo-candle">
-  1210	                    <div class="ponyo-flame" id="mFlame3"></div>
-  1211	                    <div class="candle-body"></div>
-  1212	                </div>
-  1213	            </div>
-  1214	        </div>
-  1215	
-  1216	        <!-- Message -->
-  1217	        <div class="message-card">
-  1218	            <div class="message-text">
-  1219	                Wishing you a day as bright and wonderful as you are —
-  1220	                may this year bring you joy, laughter, and all the little
-  1221	                things that make you smile.
-  1222	            </div>
-  1223	        </div>
-  1224	
-  1225	        <button class="btn" onclick="celebrate()">click here to celebrate 🌷</button>
-  1226	    </div>
-  1227	
-  1228	    <!-- ============================================
-  1229	         EASTER EGG
-  1230	         ============================================ -->
-  1231	    <div class="easter-egg" id="easterEgg">🐡</div>
-  1232	    <div class="secret-toast" id="secretToast">🍖 Ponyo found you! She just wants ham! 🐟✨</div>
-  1233	
-  1234	    <!-- ============================================
-  1235	         SCRIPTS
-  1236	         ============================================ -->
-  1237	    <script>
-  1238	        /* ============================================
-  1239	           CONSTANTS
-  1240	           ============================================ */
-  1241	        const ponyoColors  = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#FF8E8E', '#95E1D3', '#F38181', '#AA96DA', '#FCBAD3'];
-  1242	        const fishEmojis   = ['🐟', '🐠', '🐡', '🦈', '🐬', '🐳', '🦑', '🐙'];
-  1243	        const flowerEmojis = ['🌷', '🪷', '🌷', '🪷', '🌷', '🪷', '🌷'];
-  1244	
-  1245	        // Store interval IDs for cleanup
-  1246	        let intervals = [];
-  1247	
-  1248	        /* ============================================
-  1249	           BUBBLES
-  1250	           ============================================ */
-  1251	        function createBubble() {
-  1252	            const bubble = document.createElement('div');
-  1253	            bubble.className = 'bubble';
-  1254	            const size = Math.random() * 40 + 15;
-  1255	            bubble.style.width  = size + 'px';
-  1256	            bubble.style.height = size + 'px';
-  1257	            bubble.style.left   = Math.random() * 100 + 'vw';
-  1258	            bubble.style.animationDuration = (Math.random() * 8 + 6) + 's';
-  1259	            bubble.style.animationDelay    = Math.random() * 5 + 's';
-  1260	            document.body.appendChild(bubble);
-  1261	            setTimeout(() => bubble.remove(), 15000);
-  1262	        }
-  1263	
-  1264	        /* ============================================
-  1265	           WATER BALLOONS
-  1266	           ============================================ */
-  1267	        function createWaterBalloon() {
-  1268	            const balloon = document.createElement('div');
-  1269	            balloon.className = 'water-balloon';
-  1270	            const size = Math.random() * 35 + 25;
-  1271	            balloon.style.width  = size + 'px';
-  1272	            balloon.style.height = size * 1.1 + 'px';
-  1273	            balloon.style.left   = Math.random() * 90 + 5 + 'vw';
-  1274	            balloon.style.background = `radial-gradient(
-  1275	                circle at 35% 35%,
-  1276	                ${ponyoColors[Math.floor(Math.random() * ponyoColors.length)]} 0%,
-  1277	                ${ponyoColors[Math.floor(Math.random() * ponyoColors.length)]}80 100%
-  1278	            )`;
-  1279	            balloon.style.animationDuration = (Math.random() * 4 + 5) + 's';
-  1280	            balloon.style.animationDelay    = Math.random() * 3 + 's';
-  1281	            balloon.addEventListener('click', (e) => {
-  1282	                e.stopPropagation();
-  1283	                popBalloon(balloon, e.clientX, e.clientY);
-  1284	            });
-  1285	            document.body.appendChild(balloon);
-  1286	            setTimeout(() => { if (balloon.parentNode) balloon.remove(); }, 10000);
-  1287	        }
-  1288	
-  1289	        function popBalloon(element, x, y) {
-  1290	            element.classList.add('pop');
-  1291	            for (let i = 0; i < 8; i++) {
-  1292	                const splash = document.createElement('div');
-  1293	                splash.className = 'splash';
-  1294	                splash.style.left   = x + 'px';
-  1295	                splash.style.top    = y + 'px';
-  1296	                splash.style.background = ponyoColors[Math.floor(Math.random() * ponyoColors.length)];
-  1297	                splash.style.setProperty('--tx', (Math.random() * 100 - 50) + 'px');
-  1298	                splash.style.setProperty('--ty', (Math.random() * 80 + 20) + 'px');
-  1299	                document.body.appendChild(splash);
-  1300	                setTimeout(() => splash.remove(), 600);
-  1301	            }
-  1302	            setTimeout(() => element.remove(), 300);
-  1303	        }
-  1304	
-  1305	        /* ============================================
-  1306	           FISH
-  1307	           ============================================ */
-  1308	        function createFish() {
-  1309	            const fish = document.createElement('div');
-  1310	            fish.className = 'fish';
-  1311	            fish.textContent = fishEmojis[Math.floor(Math.random() * fishEmojis.length)];
-  1312	            fish.style.top              = Math.random() * 80 + 10 + '%';
-  1313	            fish.style.animationDuration = (Math.random() * 15 + 10) + 's';
-  1314	            fish.style.animationDelay    = Math.random() * 10 + 's';
-  1315	            fish.style.fontSize          = (Math.random() * 1.5 + 1.5) + 'rem';
-  1316	            document.body.appendChild(fish);
-  1317	            setTimeout(() => fish.remove(), 25000);
-  1318	        }
-  1319	
-  1320	        /* ============================================
-  1321	           SPARKLES
-  1322	           ============================================ */
-  1323	        function createSparkle() {
-  1324	            const sparkle = document.createElement('div');
-  1325	            sparkle.className = 'sparkle';
-  1326	            sparkle.style.left = Math.random() * 100 + 'vw';
-  1327	            sparkle.style.top  = Math.random() * 100 + 'vh';
-  1328	            sparkle.style.animationDelay = Math.random() * 2 + 's';
-  1329	            document.body.appendChild(sparkle);
-  1330	            setTimeout(() => sparkle.remove(), 3000);
-  1331	        }
-  1332	
-  1333	        /* ============================================
-  1334	           STARFISH
-  1335	           ============================================ */
-  1336	        function createStarfish() {
-  1337	            const starfish = document.createElement('div');
-  1338	            starfish.className = 'starfish';
-  1339	            starfish.textContent = '⭐';
-  1340	            starfish.style.left              = Math.random() * 90 + 5 + '%';
-  1341	            starfish.style.top               = Math.random() * 90 + 5 + '%';
-  1342	            starfish.style.animationDelay    = Math.random() * 5 + 's';
-  1343	            starfish.style.animationDuration = (Math.random() * 3 + 4) + 's';
-  1344	            document.body.appendChild(starfish);
-  1345	        }
-  1346	
-  1347	        /* ============================================
-  1348	           CONFETTI
-  1349	           ============================================ */
-  1350	        function createConfetti() {
-  1351	            const confetti = document.createElement('div');
-  1352	            confetti.className = 'confetti';
-  1353	            confetti.style.left = Math.random() * 100 + 'vw';
-  1354	            confetti.style.background = ponyoColors[Math.floor(Math.random() * ponyoColors.length)];
-  1355	            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-  1356	            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-  1357	            document.body.appendChild(confetti);
-  1358	            setTimeout(() => confetti.remove(), 6000);
-  1359	        }
-  1360	
-  1361	        /* ============================================
-  1362	           MAGIC PARTICLES
-  1363	           ============================================ */
-  1364	        function createMagicParticle(x, y) {
-  1365	            const particle = document.createElement('div');
-  1366	            particle.className = 'magic-particle';
-  1367	            particle.style.left = x + 'px';
-  1368	            particle.style.top  = y + 'px';
-  1369	            particle.style.background = ponyoColors[Math.floor(Math.random() * ponyoColors.length)];
-  1370	            particle.style.setProperty('--mx', (Math.random() * 200 - 100) + 'px');
-  1371	            particle.style.setProperty('--my', (Math.random() * 200 - 100) + 'px');
-  1372	            document.body.appendChild(particle);
-  1373	            setTimeout(() => particle.remove(), 3000);
-  1374	        }
-  1375	
-  1376	        /* ============================================
-  1377	           CANDLES
-  1378	           ============================================ */
-  1379	        function blowOutOpeningCandles() {
-  1380	            const flames = document.querySelectorAll('#openingOverlay .ponyo-flame');
-  1381	            flames.forEach((flame, i) => {
-  1382	                setTimeout(() => {
-  1383	                    flame.style.animation = 'none';
-  1384	                    flame.style.transform = 'translateX(-50%) scale(0)';
-  1385	                    flame.style.opacity   = '0';
-  1386	                    flame.style.transition = 'all 0.5s ease-out';
-  1387	                    const smoke = document.createElement('div');
-  1388	                    smoke.style.cssText = `
-  1389	                        position: absolute;
-  1390	                        width: 10px;
-  1391	                        height: 10px;
-  1392	                        background: rgba(200, 200, 200, 0.5);
-  1393	                        border-radius: 50%;
-  1394	                        top: -30px;
-  1395	                        left: 50%;
-  1396	                        transform: translateX(-50%);
-  1397	                        animation: smokeRise 1.5s ease-out forwards;
-  1398	                    `;
-  1399	                    flame.parentNode.appendChild(smoke);
-  1400	                    setTimeout(() => smoke.remove(), 1500);
-  1401	                }, i * 200);
-  1402	            });
-  1403	
-  1404	            setTimeout(() => {
-  1405	                document.getElementById('openingOverlay').classList.add('hidden');
-  1406	                document.getElementById('mainContent').classList.add('visible');
-  1407	                startMainScene();
-  1408	            }, 1200);
-  1409	        }
-  1410	
-  1411	        let mainCandlesBlown = false;
-  1412	
-  1413	        function blowMainCandles() {
-  1414	            if (mainCandlesBlown) return;
-  1415	            mainCandlesBlown = true;
-  1416	            const flames = document.querySelectorAll('#mainContent .ponyo-flame');
-  1417	            flames.forEach((flame, i) => {
-  1418	                setTimeout(() => {
-  1419	                    flame.style.animation = 'none';
-  1420	                    flame.style.transform = 'translateX(-50%) scale(0)';
-  1421	                    flame.style.opacity   = '0';
-  1422	                    flame.style.transition = 'all 0.5s ease-out';
-  1423	                }, i * 150);
-  1424	            });
-  1425	            setTimeout(() => {
-  1426	                document.getElementById('mainCake').textContent = '🍰';
-  1427	                document.querySelector('.name').style.color = '#FFD93D';
-  1428	            }, 800);
-  1429	        }
-  1430	
-  1431	        /* ============================================
-  1432	           BOUQUET INTERACTION
-  1433	           ============================================ */
-  1434	        function shakeBouquet() {
-  1435	            const bouquet = document.querySelector('.bouquet');
-  1436	            bouquet.style.animation = 'none';
-  1437	            bouquet.offsetHeight;
-  1438	            bouquet.style.animation = 'bouquetSway 0.5s ease-in-out 3';
-  1439	            const rect = document.getElementById('bouquet').getBoundingClientRect();
-  1440	            for (let i = 0; i < 12; i++) {
-  1441	                setTimeout(() => {
-  1442	                    createMagicParticle(
-  1443	                        rect.left + rect.width / 2,
-  1444	                        rect.top  + rect.height / 2
-  1445	                    );
-  1446	                }, i * 50);
-  1447	            }
-  1448	        }
-  1449	
-  1450	        /* ============================================
-  1451	           CELEBRATION EFFECTS
-  1452	           ============================================ */
-  1453	        function createFlowerItem() {
-  1454	            const el = document.createElement('div');
-  1455	            el.style.cssText = `
-  1456	                position: fixed;
-  1457	                font-size: ${1.5 + Math.random() * 2}rem;
-  1458	                left: ${Math.random() * 95}vw;
-  1459	                top: -50px;
-  1460	                z-index: 998;
-  1461	                pointer-events: none;
-  1462	                animation: flowerRain ${2.2 + Math.random() * 2.2}s ease-in forwards;
-  1463	            `;
-  1464	            el.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
-  1465	            document.body.appendChild(el);
-  1466	            setTimeout(() => el.remove(), 5500);
-  1467	        }
-  1468	
-  1469	        function celebrate() {
-  1470	            for (let i = 0; i < 35; i++) setTimeout(createFlowerItem, i * 55);
-  1471	            for (let i = 0; i < 60; i++) setTimeout(createConfetti, i * 30);
-  1472	            for (let i = 0; i < 15; i++) setTimeout(createBubble, i * 100);
-  1473	            for (let i = 0; i < 10; i++) setTimeout(createWaterBalloon, i * 200);
-  1474	            const name = document.querySelector('.name');
-  1475	            name.style.animation = 'none';
-  1476	            name.offsetHeight;
-  1477	            name.style.animation = 'nameGlow 1s ease-in-out 3';
-  1478	        }
-  1479	
-  1480	        /* ============================================
-  1481	           MAIN SCENE
-  1482	           ============================================ */
-  1483	        function startMainScene() {
-  1484	            for (let i = 0; i < 15; i++) createBubble();
-  1485	            for (let i = 0; i < 8;  i++) setTimeout(createWaterBalloon, i * 500);
-  1486	            for (let i = 0; i < 5;  i++) setTimeout(createFish, i * 2000);
-  1487	            for (let i = 0; i < 10; i++) createSparkle();
-  1488	            for (let i = 0; i < 6;  i++) createStarfish();
-  1489	            intervals.push(setInterval(createBubble, 1500));
-  1490	            intervals.push(setInterval(createWaterBalloon, 3000));
-  1491	            intervals.push(setInterval(createFish, 8000));
-  1492	            intervals.push(setInterval(createSparkle, 800));
-  1493	        }
-  1494	
-  1495	        /* ============================================
-  1496	           ENVELOPE OPENING
-  1497	           ============================================ */
-  1498	        let envelopeOpened = false;
-  1499	
-  1500	        function openEnvelope() {
-  1501	            if (envelopeOpened) return;
-  1502	            envelopeOpened = true;
-  1503	
-  1504	            const bob     = document.getElementById('envelopeBob');
-  1505	            const wrapper = document.getElementById('envelopeWrapper');
-  1506	
-  1507	            const bobY = bob.getBoundingClientRect().top
-  1508	                       - bob.parentElement.getBoundingClientRect().top;
-  1509	            bob.style.setProperty('--bob-offset', bobY + 'px');
-  1510	
-  1511	            bob.classList.add('open');
-  1512	
-  1513	            setTimeout(() => {
-  1514	                wrapper.classList.add('open');
-  1515	            }, 180);
-  1516	
-  1517	            setTimeout(() => {
-  1518	                document.getElementById('envelopeOverlay').classList.add('hidden');
-  1519	            }, 2400);
-  1520	        }
-  1521	
-  1522	        document.getElementById('envelopeOverlay').addEventListener('click', openEnvelope);
-  1523	        setTimeout(() => { if (!envelopeOpened) openEnvelope(); }, 5000);
-  1524	
-  1525	        /* ============================================
-  1526	           OPENING OVERLAY HANDLERS
-  1527	           ============================================ */
-  1528	        document.getElementById('openingOverlay').addEventListener('click', blowOutOpeningCandles);
-  1529	        document.getElementById('openingBubble').addEventListener('click', (e) => {
-  1530	            e.stopPropagation();
-  1531	            blowOutOpeningCandles();
-  1532	        });
-  1533	
-  1534	        /* ============================================
-  1535	           EASTER EGG
-  1536	           ============================================ */
-  1537	        document.getElementById('easterEgg').addEventListener('click', function (e) {
-  1538	            e.stopPropagation();
-  1539	            const toast = document.getElementById('secretToast');
-  1540	            toast.classList.add('show');
-  1541	            setTimeout(() => toast.classList.remove('show'), 3800);
-  1542	
-  1543	            const burst = ['🍖', '🐟', '🍖', '🐡', '🍖', '🌊', '🍖', '🐠'];
-  1544	            burst.forEach((emoji, i) => {
-  1545	                setTimeout(() => {
-  1546	                    const el = document.createElement('div');
-  1547	                    el.className = 'flying-item';
-  1548	                    el.textContent = emoji;
-  1549	                    el.style.fontSize = (1.4 + Math.random() * 0.8) + 'rem';
-  1550	                    el.style.right  = (10 + Math.random() * 20) + 'px';
-  1551	                    el.style.bottom = '30px';
-  1552	                    const angle = (Math.random() * 120 + 120) * (Math.PI / 180);
-  1553	                    const dist1 = 100 + Math.random() * 150;
-  1554	                    const dist2 = 200 + Math.random() * 250;
-  1555	                    el.style.setProperty('--fx',  (-Math.cos(angle) * dist1) + 'px');
-  1556	                    el.style.setProperty('--fy',  (-Math.sin(angle) * dist1) + 'px');
-  1557	                    el.style.setProperty('--fx2', (-Math.cos(angle) * dist2 + (Math.random() * 60 - 30)) + 'px');
-  1558	                    el.style.setProperty('--fy2', (-Math.sin(angle) * dist2 + (Math.random() * 60 - 30)) + 'px');
-  1559	                    document.body.appendChild(el);
-  1560	                    setTimeout(() => el.remove(), 2900);
-  1561	                }, i * 110);
-  1562	            });
-  1563	        });
-  1564	    </script>
-  1565	</body>
-  1566	</html>
-  1567
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Leecha! 🐟</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Patrick Hand', cursive;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: #87CEEB;
+        }
+
+        /* ============================================
+           OCEAN BACKGROUND
+           ============================================ */
+        .ocean-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(135, 206, 235, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(72, 209, 204, 0.2) 0%, transparent 70%),
+                linear-gradient(180deg,
+                    #87CEEB 0%,
+                    #48D1CC 30%,
+                    #20B2AA 60%,
+                    #008B8B 100%);
+            z-index: 0;
+        }
+
+        /* ============================================
+           WAVES
+           ============================================ */
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100px;
+            background-repeat: repeat-x;
+            opacity: 0.6;
+        }
+
+        .wave-1 {
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C150,120 350,0 600,60 C850,120 1050,0 1200,60 L1200,120 L0,120 Z' fill='%23FF6B6B' opacity='0.3'/%3E%3C/svg%3E");
+            background-size: 600px 100px;
+            animation: waveMove 8s linear infinite;
+        }
+
+        .wave-2 {
+            bottom: 10px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z' fill='%23FFB6C1' opacity='0.4'/%3E%3C/svg%3E");
+            background-size: 500px 100px;
+            animation: waveMove 6s linear infinite reverse;
+        }
+
+        .wave-3 {
+            bottom: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,50 C180,10 360,90 600,50 C840,10 1020,90 1200,50 L1200,120 L0,120 Z' fill='%23FFD93D' opacity='0.3'/%3E%3C/svg%3E");
+            background-size: 700px 100px;
+            animation: waveMove 10s linear infinite;
+        }
+
+        @keyframes waveMove {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============================================
+           CLOUDS
+           ============================================ */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+            filter: blur(1px);
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+        }
+
+        .cloud-1 {
+            width: 120px;
+            height: 50px;
+            top: 10%;
+            left: 10%;
+            animation: cloudFloat 20s ease-in-out infinite;
+        }
+
+        .cloud-1::before {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 15px;
+        }
+
+        .cloud-1::after {
+            width: 80px;
+            height: 50px;
+            top: -20px;
+            right: 10px;
+        }
+
+        .cloud-2 {
+            width: 100px;
+            height: 40px;
+            top: 20%;
+            right: 15%;
+            animation: cloudFloat 25s ease-in-out infinite reverse;
+        }
+
+        .cloud-2::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 20px;
+        }
+
+        .cloud-2::after {
+            width: 70px;
+            height: 40px;
+            top: -15px;
+            right: 15px;
+        }
+
+        .cloud-3 {
+            width: 140px;
+            height: 55px;
+            top: 5%;
+            left: 50%;
+            animation: cloudFloat 30s ease-in-out infinite;
+        }
+
+        .cloud-3::before {
+            width: 70px;
+            height: 70px;
+            top: -35px;
+            left: 25px;
+        }
+
+        .cloud-3::after {
+            width: 90px;
+            height: 55px;
+            top: -25px;
+            right: 20px;
+        }
+
+        @keyframes cloudFloat {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25%      { transform: translateX(30px) translateY(-10px); }
+            50%      { transform: translateX(-20px) translateY(5px); }
+            75%      { transform: translateX(20px) translateY(-5px); }
+        }
+
+        /* ============================================
+           OPENING OVERLAY
+           ============================================ */
+        .opening-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(26, 58, 92, 0.85) 0%, rgba(13, 33, 55, 0.9) 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 2s ease-out, visibility 2s;
+        }
+
+        .opening-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .opening-bubble {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(135, 206, 235, 0.6) 40%,
+                rgba(72, 209, 204, 0.4) 100%);
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            box-shadow:
+                0 0 30px rgba(135, 206, 235, 0.5),
+                inset -10px -10px 20px rgba(255, 182, 193, 0.3),
+                inset 10px 10px 20px rgba(255, 255, 255, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: bubbleFloat 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .opening-bubble::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            top: 25px;
+            left: 35px;
+            transform: rotate(-20deg);
+        }
+
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50%      { transform: translateY(-20px) scale(1.02); }
+        }
+
+        .ponyo-cake {
+            font-size: 4rem;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        }
+
+        .candles-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .ponyo-candle {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .candle-body {
+            width: 8px;
+            height: 30px;
+            background: linear-gradient(to right, #FF6B6B, #FFB6C1, #FF6B6B);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .candle-body::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 5px;
+            background: #8B4513;
+            border-radius: 2px;
+        }
+
+        .ponyo-flame {
+            width: 16px;
+            height: 24px;
+            background: radial-gradient(ellipse at bottom,
+                #FF4757 0%,
+                #FFA502 40%,
+                #FFDD59 70%,
+                transparent 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flameDance 0.3s ease-in-out infinite alternate;
+            box-shadow: 0 0 15px #FFA502, 0 0 30px #FF4757;
+        }
+
+        @keyframes flameDance {
+            0%   { transform: translateX(-50%) scale(1) rotate(-5deg) skewX(-3deg); }
+            100% { transform: translateX(-50%) scale(1.1) rotate(5deg) skewX(3deg); }
+        }
+
+        .opening-text {
+            color: #FFD93D;
+            font-size: 1.8rem;
+            margin-top: 30px;
+            text-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+            animation: textPulse 2s ease-in-out infinite;
+        }
+
+        .hint-text {
+            color: #87CEEB;
+            font-size: 1rem;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeInHint 1s ease-out 2s forwards;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.8; }
+            50%      { opacity: 1; }
+        }
+
+        @keyframes fadeInHint {
+            to { opacity: 0.7; }
+        }
+
+        /* ============================================
+           MAIN CONTAINER
+           ============================================ */
+        .container {
+            text-align: center;
+            z-index: 10;
+            opacity: 0;
+            display: none;
+            position: relative;
+            padding: 20px;
+        }
+
+        .container.visible {
+            display: block;
+            animation: gentleAppear 2s ease-out forwards;
+        }
+
+        @keyframes gentleAppear {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow:
+                3px 3px 0px #FF6B6B,
+                6px 6px 0px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            animation: titleBounce 3s ease-in-out infinite;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-8px); }
+        }
+
+        .name {
+            font-size: 4.5rem;
+            color: #FF6B6B;
+            text-shadow:
+                0 0 20px rgba(255, 107, 107, 0.4),
+                3px 3px 0px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            font-weight: bold;
+            letter-spacing: 4px;
+            animation: nameGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes nameGlow {
+            0%, 100% {
+                text-shadow:
+                    0 0 20px rgba(255, 107, 107, 0.4),
+                    3px 3px 0px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                text-shadow:
+                    0 0 40px rgba(255, 107, 107, 0.7),
+                    0 0 60px rgba(255, 182, 193, 0.4),
+                    3px 3px 0px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        /* ============================================
+           BUNNY ASCII ART
+           ============================================ */
+        .bunny-art {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            line-height: 1.6;
+            white-space: pre;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.6);
+            display: inline-block;
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px dashed #FFB6C1;
+        }
+
+        /* ============================================
+           BOUQUET
+           ============================================ */
+        .bouquet-container {
+            position: relative;
+            display: inline-block;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .bouquet-container:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .bouquet {
+            font-size: 5rem;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+            animation: bouquetSway 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        @keyframes bouquetSway {
+            0%, 100% { transform: rotate(-3deg); }
+            50%      { transform: rotate(3deg); }
+        }
+
+        .bouquet-ribbon {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 22px;
+            background: linear-gradient(135deg, #FF6B6B, #FFB6C1);
+            border-radius: 0 0 25px 25px;
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+        }
+
+        .bouquet-ribbon::before {
+            content: '🎀';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        /* ============================================
+           CAKE
+           ============================================ */
+        .cake-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .main-cake {
+            font-size: 4.5rem;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .main-cake:hover {
+            transform: scale(1.1);
+        }
+
+        .main-candles {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        /* ============================================
+           MESSAGE CARD
+           ============================================ */
+        .message-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px 20px 20px 5px;
+            padding: 25px 30px;
+            max-width: 520px;
+            margin: 15px auto;
+            position: relative;
+            box-shadow:
+                5px 5px 0px rgba(255, 107, 107, 0.3),
+                10px 10px 0px rgba(255, 182, 193, 0.2);
+            border: 2px solid rgba(255, 107, 107, 0.2);
+            transform: rotate(-1deg);
+            transition: transform 0.3s;
+        }
+
+        .message-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .message-card::before {
+            content: '🌷';
+            position: absolute;
+            top: -18px;
+            right: 25px;
+            font-size: 2.2rem;
+            transform: rotate(15deg);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .message-text {
+            font-size: 1.25rem;
+            color: #4a4a4a;
+            line-height: 1.9;
+            white-space: pre-line;
+        }
+
+        /* ============================================
+           BUTTON
+           ============================================ */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-family: 'Patrick Hand', cursive;
+            color: #fff;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow:
+                0 5px 15px rgba(255, 107, 107, 0.4),
+                3px 3px 0px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow:
+                0 10px 25px rgba(255, 107, 107, 0.5),
+                3px 3px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* ============================================
+           BUBBLES
+           ============================================ */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(135, 206, 235, 0.4) 40%,
+                rgba(72, 209, 204, 0.2) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow:
+                inset -5px -5px 10px rgba(255, 182, 193, 0.2),
+                inset 5px 5px 10px rgba(255, 255, 255, 0.5),
+                0 0 15px rgba(135, 206, 235, 0.3);
+            animation: bubbleRise linear infinite;
+            pointer-events: none;
+        }
+
+        .bubble::before {
+            content: '';
+            position: absolute;
+            width: 25%;
+            height: 20%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            top: 15%;
+            left: 20%;
+            transform: rotate(-20deg);
+        }
+
+        @keyframes bubbleRise {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(1);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(-20vh) translateX(50px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* ============================================
+           WATER BALLOONS
+           ============================================ */
+        .water-balloon {
+            position: absolute;
+            border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+            animation: waterBalloonBounce linear infinite;
+            cursor: pointer;
+            z-index: 5;
+            box-shadow:
+                inset -8px -8px 15px rgba(0, 0, 0, 0.1),
+                inset 8px 8px 15px rgba(255, 255, 255, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .water-balloon::before {
+            content: '';
+            position: absolute;
+            width: 20%;
+            height: 15%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            top: 20%;
+            left: 25%;
+            transform: rotate(-30deg);
+        }
+
+        .water-balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+        }
+
+        @keyframes waterBalloonBounce {
+            0% {
+                transform: translateY(-100px) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.9; }
+            25% { transform: translateY(20vh) translateX(20px) rotate(90deg); }
+            50% { transform: translateY(50vh) translateX(-10px) rotate(180deg); }
+            75% { transform: translateY(80vh) translateX(30px) rotate(270deg); }
+            100% {
+                transform: translateY(110vh) translateX(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .water-balloon.pop {
+            animation: balloonPop 0.3s ease-out forwards !important;
+        }
+
+        @keyframes balloonPop {
+            0%   { transform: scale(1); opacity: 0.9; }
+            50%  { transform: scale(1.3); opacity: 0.5; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .splash {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: splashDrop 0.6s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes splashDrop {
+            0%   { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* ============================================
+           FISH
+           ============================================ */
+        .fish {
+            position: absolute;
+            font-size: 2rem;
+            animation: fishSwim linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes fishSwim {
+            0%   { transform: translateX(-100px) translateY(0) scaleX(1); }
+            45%  { transform: translateX(50vw) translateY(-20px) scaleX(1); }
+            50%  { transform: translateX(50vw) translateY(-20px) scaleX(-1); }
+            95%  { transform: translateX(-100px) translateY(0) scaleX(-1); }
+            100% { transform: translateX(-100px) translateY(0) scaleX(1); }
+        }
+
+        /* ============================================
+           SPARKLES
+           ============================================ */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFD93D;
+            border-radius: 50%;
+            animation: sparkleTwinkle 2s ease-in-out infinite;
+            box-shadow: 0 0 6px #FFD93D;
+        }
+
+        @keyframes sparkleTwinkle {
+            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50%      { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        /* ============================================
+           STARFISH
+           ============================================ */
+        .starfish {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: starfishWiggle 5s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        @keyframes starfishWiggle {
+            0%, 100% { transform: rotate(-10deg) translateY(0); }
+            50%      { transform: rotate(10deg) translateY(-10px); }
+        }
+
+        /* ============================================
+           CONFETTI
+           ============================================ */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confettiFall linear forwards;
+            border-radius: 2px;
+        }
+
+        @keyframes confettiFall {
+            0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg) scale(0.5); opacity: 0; }
+        }
+
+        /* ============================================
+           MAGIC PARTICLES
+           ============================================ */
+        .magic-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: magicFloat 3s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes magicFloat {
+            0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(0); opacity: 0; }
+        }
+
+        /* ============================================
+           EASTER EGG
+           ============================================ */
+        .easter-egg {
+            position: fixed;
+            bottom: 22px;
+            right: 18px;
+            font-size: 16px;
+            opacity: 0.12;
+            cursor: pointer;
+            z-index: 50;
+            transition: opacity 0.3s, transform 0.3s;
+            animation: eggWobble 7s ease-in-out infinite;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .easter-egg:hover {
+            opacity: 0.55;
+            transform: scale(1.4) rotate(15deg);
+        }
+
+        @keyframes eggWobble {
+            0%, 100% { transform: rotate(-8deg) translateY(0); }
+            50%      { transform: rotate(8deg) translateY(-4px); }
+        }
+
+        .secret-toast {
+            position: fixed;
+            bottom: 55px;
+            left: 50%;
+            transform: translateX(-50%) translateY(18px);
+            background: rgba(255, 255, 255, 0.97);
+            color: #4a4a4a;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.15rem;
+            padding: 13px 26px;
+            border-radius: 40px;
+            border: 2px solid #FF6B6B;
+            box-shadow:
+                0 6px 24px rgba(255, 107, 107, 0.35),
+                3px 3px 0px rgba(255, 182, 193, 0.4);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.4s, transform 0.4s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .secret-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .flying-item {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            animation: itemFly 2.8s ease-out forwards;
+        }
+
+        @keyframes itemFly {
+            0%   { transform: translate(0, 0) rotate(0deg) scale(0.6); opacity: 1; }
+            35%  { transform: translate(var(--fx), var(--fy)) rotate(200deg) scale(1.3); opacity: 1; }
+            100% { transform: translate(var(--fx2), var(--fy2)) rotate(440deg) scale(0.2); opacity: 0; }
+        }
+
+        @keyframes smokeRise {
+            0%   { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.6; }
+            100% { transform: translateX(-50%) translateY(-50px) scale(2.5); opacity: 0; }
+        }
+
+        /* ============================================
+           ENVELOPE OVERLAY
+           ============================================ */
+        .envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse 80% 70% at 50% 40%,
+                #f9ebe8 0%,
+                #f2d8d2 55%,
+                #e8c5bc 100%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.8s;
+            will-change: opacity;
+        }
+
+        .envelope-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .envelope-bob {
+            animation: envelopeBob 4s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .envelope-bob.open {
+            animation: envelopeSettle 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+        }
+
+        @keyframes envelopeBob {
+            0%, 100% { transform: translateY(0px); }
+            50%      { transform: translateY(-10px); }
+        }
+
+        @keyframes envelopeSettle {
+            0%   { transform: translateY(var(--bob-offset, 0px)); }
+            100% { transform: translateY(0px); }
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 320px;
+            height: 230px;
+            cursor: pointer;
+            perspective: 1200px;
+            perspective-origin: 50% 0%;
+            filter:
+                drop-shadow(0 18px 40px rgba(190, 130, 120, 0.28))
+                drop-shadow(0 4px 8px rgba(190, 130, 120, 0.15));
+        }
+
+        .env-body {
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            background: linear-gradient(160deg, #fdf0ee 40%, #f8e0da 100%);
+            border: 1.2px solid rgba(210, 155, 145, 0.55);
+            box-shadow:
+                0 2px 0px rgba(210, 155, 145, 0.4),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+        }
+
+        .env-body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(195, 145, 135, 0.13) 0%, transparent 42%),
+                linear-gradient(225deg, rgba(195, 145, 135, 0.10) 0%, transparent 42%),
+                linear-gradient(0deg, rgba(195, 145, 135, 0.16) 0%, transparent 38%);
+            pointer-events: none;
+        }
+
+        .env-body::after {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border-radius: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            pointer-events: none;
+        }
+
+        .env-letter {
+            position: absolute;
+            bottom: 10px;
+            left: 14px;
+            right: 14px;
+            height: 0;
+            overflow: hidden;
+            background: linear-gradient(170deg, #fffcfb 60%, #fef0ee);
+            border-radius: 8px;
+            border: 1px solid rgba(220, 170, 160, 0.4);
+            transition: height 1.05s 0.45s cubic-bezier(0.34, 1.15, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 -2px 12px rgba(190, 130, 120, 0.12),
+                0 4px 16px rgba(190, 130, 120, 0.10);
+            z-index: 2;
+            will-change: height;
+        }
+
+        .envelope-wrapper.open .env-letter {
+            height: 130px;
+        }
+
+        .env-letter-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition:
+                opacity 0.55s 1.2s ease,
+                transform 0.55s 1.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+
+        .envelope-wrapper.open .env-letter-inner {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .env-letter-emoji {
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+
+        .env-letter-text {
+            font-size: 1rem;
+            color: #c47a7a;
+            font-family: 'Patrick Hand', cursive;
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+
+        .env-flap-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 130px;
+            z-index: 6;
+            pointer-events: none;
+            perspective: 1200px;
+            perspective-origin: 50% 0%;
+        }
+
+        .env-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 130px;
+            background: linear-gradient(175deg, #f5d5ce 0%, #eec5bc 50%, #e8b8ae 100%);
+            border-radius: 14px 14px 0 0;
+            clip-path: polygon(0 0, 100% 0, 50% 78%);
+            border: 1.2px solid rgba(210, 155, 145, 0.5);
+            transform-origin: top center;
+            transform: rotateX(0deg);
+            transition: transform 1.0s cubic-bezier(0.25, 0.85, 0.25, 1);
+            will-change: transform;
+            backface-visibility: hidden;
+            box-shadow: inset 0 -8px 20px rgba(180, 110, 100, 0.12);
+        }
+
+        .env-flap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 0%, transparent 100%);
+            border-radius: 14px 14px 0 0;
+            pointer-events: none;
+        }
+
+        .env-flap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(175deg, rgba(0, 0, 0, 0.0) 0%, rgba(140, 80, 70, 0.10) 100%);
+            transition: opacity 1.0s ease;
+            pointer-events: none;
+        }
+
+        .envelope-wrapper.open .env-flap {
+            transform: rotateX(-178deg);
+        }
+
+        .envelope-wrapper.open .env-flap::after {
+            opacity: 0;
+        }
+
+        .env-seal {
+            position: absolute;
+            top: calc(130px * 0.78 - 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            z-index: 7;
+            pointer-events: none;
+            transition:
+                opacity 0.3s 0.05s ease,
+                transform 0.3s 0.05s cubic-bezier(0.34, 1.2, 0.64, 1);
+            will-change: opacity, transform;
+            filter: drop-shadow(0 2px 6px rgba(190, 130, 120, 0.3));
+        }
+
+        .envelope-wrapper.open .env-seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5) translateY(-6px);
+        }
+
+        .envelope-label {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: rgba(160, 110, 100, 0.75);
+            letter-spacing: 0.05em;
+            text-align: center;
+            animation: labelBreath 3s ease-in-out infinite;
+        }
+
+        .envelope-label .sparkle-gold {
+            color: #d4a843;
+            font-style: normal;
+            font-size: 0.9rem;
+        }
+
+        @keyframes labelBreath {
+            0%, 100% { opacity: 0.7; }
+            50%      { opacity: 1.0; }
+        }
+
+        .envelope-click-hint {
+            display: none;
+        }
+
+        @keyframes flowerRain {
+            0%   { transform: translateY(-60px) rotate(-10deg) scale(0.6); opacity: 0; }
+            5%   { opacity: 1; }
+            90%  { opacity: 0.9; }
+            100% { transform: translateY(110vh) rotate(20deg) scale(0.9); opacity: 0; }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 600px) {
+            h1           { font-size: 2rem; }
+            .name        { font-size: 3rem; }
+            .bouquet     { font-size: 3.5rem; }
+            .main-cake   { font-size: 3.5rem; }
+            .message-card { margin: 15px 10px; padding: 20px; }
+            .bunny-art   { font-size: 0.9rem; padding: 10px 15px; }
+            .message-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         BACKGROUND
+         ============================================ -->
+    <div class="ocean-bg"></div>
+
+    <!-- Waves -->
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+
+    <!-- Clouds -->
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+
+    <!-- ============================================
+         ENVELOPE OVERLAY
+         ============================================ -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+        <div class="envelope-bob" id="envelopeBob">
+            <div class="envelope-wrapper" id="envelopeWrapper">
+                <div class="env-body"></div>
+                <div class="env-letter">
+                    <div class="env-letter-inner">
+                        <div class="env-letter-emoji">🎂🌷</div>
+                        <div class="env-letter-text">For Leecha ✨</div>
+                    </div>
+                </div>
+                <div class="env-flap-container">
+                    <div class="env-flap" id="envFlap"></div>
+                </div>
+                <div class="env-seal" id="envSeal">💌</div>
+            </div>
+        </div>
+        <div class="envelope-label">A surprise awaits...</div>
+        <div class="envelope-click-hint">Click to open 💌</div>
+    </div>
+
+    <!-- ============================================
+         OPENING OVERLAY
+         ============================================ -->
+    <div class="opening-overlay" id="openingOverlay">
+        <div class="opening-bubble" id="openingBubble">
+            <div class="ponyo-cake">🎂</div>
+        </div>
+        <div class="candles-row">
+            <div class="ponyo-candle">
+                <div class="ponyo-flame" id="oFlame1"></div>
+                <div class="candle-body"></div>
+            </div>
+            <div class="ponyo-candle">
+                <div class="ponyo-flame" id="oFlame2"></div>
+                <div class="candle-body"></div>
+            </div>
+            <div class="ponyo-candle">
+                <div class="ponyo-flame" id="oFlame3"></div>
+                <div class="candle-body"></div>
+            </div>
+        </div>
+        <div class="opening-text">Make a wish, Leecha...</div>
+        <div class="hint-text">Blow the candles or click the bubble ✨</div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <div class="container" id="mainContent">
+        <h1>Happy Birthday</h1>
+        <div class="name">Leecha 🥳🎉</div>
+
+        <!-- Bunny ASCII Art -->
+        <div class="bunny-art">(\_(/)
+(• .•)
+(&gt;🌷</div>
+
+        <!-- Bouquet -->
+        <div class="bouquet-container" id="bouquet" onclick="shakeBouquet()">
+            <div class="bouquet">💐</div>
+            <div class="bouquet-ribbon"></div>
+        </div>
+
+        <!-- Cake -->
+        <div class="cake-wrapper" id="cakeWrapper" onclick="blowMainCandles()">
+            <div class="main-cake" id="mainCake">🎂</div>
+            <div class="main-candles">
+                <div class="ponyo-candle">
+                    <div class="ponyo-flame" id="mFlame1"></div>
+                    <div class="candle-body"></div>
+                </div>
+                <div class="ponyo-candle">
+                    <div class="ponyo-flame" id="mFlame2"></div>
+                    <div class="candle-body"></div>
+                </div>
+                <div class="ponyo-candle">
+                    <div class="ponyo-flame" id="mFlame3"></div>
+                    <div class="candle-body"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message -->
+        <div class="message-card">
+            <div class="message-text">
+                Wishing you a day as bright and wonderful as you are —
+                may this year bring you joy, laughter, and all the little
+                things that make you smile.
+            </div>
+        </div>
+
+        <button class="btn" onclick="celebrate()">click here to celebrate 🌷</button>
+    </div>
+
+    <!-- ============================================
+         EASTER EGG
+         ============================================ -->
+    <div class="easter-egg" id="easterEgg">🐡</div>
+    <div class="secret-toast" id="secretToast">🍖 Ponyo found you! She just wants ham! 🐟✨</div>
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+    <script>
+        /* ============================================
+           CONSTANTS
+           ============================================ */
+        const ponyoColors  = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#FF8E8E', '#95E1D3', '#F38181', '#AA96DA', '#FCBAD3'];
+        const fishEmojis   = ['🐟', '🐠', '🐡', '🦈', '🐬', '🐳', '🦑', '🐙'];
+        const flowerEmojis = ['🌷', '🪷', '🌷', '🪷', '🌷', '🪷', '🌷'];
+
+        // Store interval IDs for cleanup
+        let intervals = [];
+
+        /* ============================================
+           BUBBLES
+           ============================================ */
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 40 + 15;
+            bubble.style.width  = size + 'px';
+            bubble.style.height = size + 'px';
+            bubble.style.left   = Math.random() * 100 + 'vw';
+            bubble.style.animationDuration = (Math.random() * 8 + 6) + 's';
+            bubble.style.animationDelay    = Math.random() * 5 + 's';
+            document.body.appendChild(bubble);
+            setTimeout(() => bubble.remove(), 15000);
+        }
+
+        /* ============================================
+           WATER BALLOONS
+           ============================================ */
+        function createWaterBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'water-balloon';
+            const size = Math.random() * 35 + 25;
+            balloon.style.width  = size + 'px';
+            balloon.style.height = size * 1.1 + 'px';
+            balloon.style.left   = Math.random() * 90 + 5 + 'vw';
+            balloon.style.background = `radial-gradient(
+                circle at 35% 35%,
+                ${ponyoColors[Math.floor(Math.random() * ponyoColors.length)]} 0%,
+                ${ponyoColors[Math.floor(Math.random() * ponyoColors.length)]}80 100%
+            )`;
+            balloon.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            balloon.style.animationDelay    = Math.random() * 3 + 's';
+            balloon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                popBalloon(balloon, e.clientX, e.clientY);
+            });
+            document.body.appendChild(balloon);
+            setTimeout(() => { if (balloon.parentNode) balloon.remove(); }, 10000);
+        }
+
+        function popBalloon(element, x, y) {
+            element.classList.add('pop');
+            for (let i = 0; i < 8; i++) {
+                const splash = document.createElement('div');
+                splash.className = 'splash';
+                splash.style.left   = x + 'px';
+                splash.style.top    = y + 'px';
+                splash.style.background = ponyoColors[Math.floor(Math.random() * ponyoColors.length)];
+                splash.style.setProperty('--tx', (Math.random() * 100 - 50) + 'px');
+                splash.style.setProperty('--ty', (Math.random() * 80 + 20) + 'px');
+                document.body.appendChild(splash);
+                setTimeout(() => splash.remove(), 600);
+            }
+            setTimeout(() => element.remove(), 300);
+        }
+
+        /* ============================================
+           FISH
+           ============================================ */
+        function createFish() {
+            const fish = document.createElement('div');
+            fish.className = 'fish';
+            fish.textContent = fishEmojis[Math.floor(Math.random() * fishEmojis.length)];
+            fish.style.top              = Math.random() * 80 + 10 + '%';
+            fish.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            fish.style.animationDelay    = Math.random() * 10 + 's';
+            fish.style.fontSize          = (Math.random() * 1.5 + 1.5) + 'rem';
+            document.body.appendChild(fish);
+            setTimeout(() => fish.remove(), 25000);
+        }
+
+        /* ============================================
+           SPARKLES
+           ============================================ */
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top  = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 3000);
+        }
+
+        /* ============================================
+           STARFISH
+           ============================================ */
+        function createStarfish() {
+            const starfish = document.createElement('div');
+            starfish.className = 'starfish';
+            starfish.textContent = '⭐';
+            starfish.style.left              = Math.random() * 90 + 5 + '%';
+            starfish.style.top               = Math.random() * 90 + 5 + '%';
+            starfish.style.animationDelay    = Math.random() * 5 + 's';
+            starfish.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(starfish);
+        }
+
+        /* ============================================
+           CONFETTI
+           ============================================ */
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.background = ponyoColors[Math.floor(Math.random() * ponyoColors.length)];
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 6000);
+        }
+
+        /* ============================================
+           MAGIC PARTICLES
+           ============================================ */
+        function createMagicParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'magic-particle';
+            particle.style.left = x + 'px';
+            particle.style.top  = y + 'px';
+            particle.style.background = ponyoColors[Math.floor(Math.random() * ponyoColors.length)];
+            particle.style.setProperty('--mx', (Math.random() * 200 - 100) + 'px');
+            particle.style.setProperty('--my', (Math.random() * 200 - 100) + 'px');
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 3000);
+        }
+
+        /* ============================================
+           CANDLES
+           ============================================ */
+        function blowOutOpeningCandles() {
+            const flames = document.querySelectorAll('#openingOverlay .ponyo-flame');
+            flames.forEach((flame, i) => {
+                setTimeout(() => {
+                    flame.style.animation = 'none';
+                    flame.style.transform = 'translateX(-50%) scale(0)';
+                    flame.style.opacity   = '0';
+                    flame.style.transition = 'all 0.5s ease-out';
+                    const smoke = document.createElement('div');
+                    smoke.style.cssText = `
+                        position: absolute;
+                        width: 10px;
+                        height: 10px;
+                        background: rgba(200, 200, 200, 0.5);
+                        border-radius: 50%;
+                        top: -30px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        animation: smokeRise 1.5s ease-out forwards;
+                    `;
+                    flame.parentNode.appendChild(smoke);
+                    setTimeout(() => smoke.remove(), 1500);
+                }, i * 200);
+            });
+
+            setTimeout(() => {
+                document.getElementById('openingOverlay').classList.add('hidden');
+                document.getElementById('mainContent').classList.add('visible');
+                startMainScene();
+            }, 1200);
+        }
+
+        let mainCandlesBlown = false;
+
+        function blowMainCandles() {
+            if (mainCandlesBlown) return;
+            mainCandlesBlown = true;
+            const flames = document.querySelectorAll('#mainContent .ponyo-flame');
+            flames.forEach((flame, i) => {
+                setTimeout(() => {
+                    flame.style.animation = 'none';
+                    flame.style.transform = 'translateX(-50%) scale(0)';
+                    flame.style.opacity   = '0';
+                    flame.style.transition = 'all 0.5s ease-out';
+                }, i * 150);
+            });
+            setTimeout(() => {
+                document.getElementById('mainCake').textContent = '🍰';
+                document.querySelector('.name').style.color = '#FFD93D';
+            }, 800);
+        }
+
+        /* ============================================
+           BOUQUET INTERACTION
+           ============================================ */
+        function shakeBouquet() {
+            const bouquet = document.querySelector('.bouquet');
+            bouquet.style.animation = 'none';
+            bouquet.offsetHeight;
+            bouquet.style.animation = 'bouquetSway 0.5s ease-in-out 3';
+            const rect = document.getElementById('bouquet').getBoundingClientRect();
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    createMagicParticle(
+                        rect.left + rect.width / 2,
+                        rect.top  + rect.height / 2
+                    );
+                }, i * 50);
+            }
+        }
+
+        /* ============================================
+           CELEBRATION EFFECTS
+           ============================================ */
+        function createFlowerItem() {
+            const el = document.createElement('div');
+            el.style.cssText = `
+                position: fixed;
+                font-size: ${1.5 + Math.random() * 2}rem;
+                left: ${Math.random() * 95}vw;
+                top: -50px;
+                z-index: 998;
+                pointer-events: none;
+                animation: flowerRain ${2.2 + Math.random() * 2.2}s ease-in forwards;
+            `;
+            el.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 5500);
+        }
+
+        function celebrate() {
+            for (let i = 0; i < 35; i++) setTimeout(createFlowerItem, i * 55);
+            for (let i = 0; i < 60; i++) setTimeout(createConfetti, i * 30);
+            for (let i = 0; i < 15; i++) setTimeout(createBubble, i * 100);
+            for (let i = 0; i < 10; i++) setTimeout(createWaterBalloon, i * 200);
+            const name = document.querySelector('.name');
+            name.style.animation = 'none';
+            name.offsetHeight;
+            name.style.animation = 'nameGlow 1s ease-in-out 3';
+        }
+
+        /* ============================================
+           MAIN SCENE
+           ============================================ */
+        function startMainScene() {
+            for (let i = 0; i < 15; i++) createBubble();
+            for (let i = 0; i < 8;  i++) setTimeout(createWaterBalloon, i * 500);
+            for (let i = 0; i < 5;  i++) setTimeout(createFish, i * 2000);
+            for (let i = 0; i < 10; i++) createSparkle();
+            for (let i = 0; i < 6;  i++) createStarfish();
+            intervals.push(setInterval(createBubble, 1500));
+            intervals.push(setInterval(createWaterBalloon, 3000));
+            intervals.push(setInterval(createFish, 8000));
+            intervals.push(setInterval(createSparkle, 800));
+        }
+
+        /* ============================================
+           ENVELOPE OPENING
+           ============================================ */
+        let envelopeOpened = false;
+
+        function openEnvelope() {
+            if (envelopeOpened) return;
+            envelopeOpened = true;
+
+            const bob     = document.getElementById('envelopeBob');
+            const wrapper = document.getElementById('envelopeWrapper');
+
+            const bobY = bob.getBoundingClientRect().top
+                       - bob.parentElement.getBoundingClientRect().top;
+            bob.style.setProperty('--bob-offset', bobY + 'px');
+
+            bob.classList.add('open');
+
+            setTimeout(() => {
+                wrapper.classList.add('open');
+            }, 180);
+
+            setTimeout(() => {
+                document.getElementById('envelopeOverlay').classList.add('hidden');
+            }, 2400);
+        }
+
+        document.getElementById('envelopeOverlay').addEventListener('click', openEnvelope);
+        setTimeout(() => { if (!envelopeOpened) openEnvelope(); }, 5000);
+
+        /* ============================================
+           OPENING OVERLAY HANDLERS
+           ============================================ */
+        document.getElementById('openingOverlay').addEventListener('click', blowOutOpeningCandles);
+        document.getElementById('openingBubble').addEventListener('click', (e) => {
+            e.stopPropagation();
+            blowOutOpeningCandles();
+        });
+
+        /* ============================================
+           EASTER EGG
+           ============================================ */
+        document.getElementById('easterEgg').addEventListener('click', function (e) {
+            e.stopPropagation();
+            const toast = document.getElementById('secretToast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3800);
+
+            const burst = ['🍖', '🐟', '🍖', '🐡', '🍖', '🌊', '🍖', '🐠'];
+            burst.forEach((emoji, i) => {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'flying-item';
+                    el.textContent = emoji;
+                    el.style.fontSize = (1.4 + Math.random() * 0.8) + 'rem';
+                    el.style.right  = (10 + Math.random() * 20) + 'px';
+                    el.style.bottom = '30px';
+                    const angle = (Math.random() * 120 + 120) * (Math.PI / 180);
+                    const dist1 = 100 + Math.random() * 150;
+                    const dist2 = 200 + Math.random() * 250;
+                    el.style.setProperty('--fx',  (-Math.cos(angle) * dist1) + 'px');
+                    el.style.setProperty('--fy',  (-Math.sin(angle) * dist1) + 'px');
+                    el.style.setProperty('--fx2', (-Math.cos(angle) * dist2 + (Math.random() * 60 - 30)) + 'px');
+                    el.style.setProperty('--fy2', (-Math.sin(angle) * dist2 + (Math.random() * 60 - 30)) + 'px');
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 2900);
+                }, i * 110);
+            });
+        });
+    </script>
+</body>
+</html>
